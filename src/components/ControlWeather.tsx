@@ -29,13 +29,10 @@ export default function ControlWeather() {
                 flexDirection: 'column'
             }}
         >
-
             <Typography mb={2} component="h3" variant="h6" color="primary">
                 Variables Meteorológicas
             </Typography>
-
             <Box sx={{ minWidth: 120 }}>
-
                 <FormControl fullWidth>
                     <InputLabel id="simple-select-label">Variables</InputLabel>
                     <Select
@@ -45,17 +42,10 @@ export default function ControlWeather() {
                         defaultValue='-1'
                     >
                         <MenuItem key="-1" value="-1" disabled>Seleccione una variable</MenuItem>
-
                         {options}
-
                     </Select>
                 </FormControl>
-
             </Box>
-
-
         </Paper>
-
-
     )
 }
