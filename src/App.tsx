@@ -6,10 +6,10 @@ import IndicatorWeather from './components/IndicatorWeather';
 function App() {
 
   return (
+    <>
     <Grid container spacing={5}>
 
       {/* Indicadores */}
-
 
       <Grid size={{ xs: 12, xl: 3 }}>
         <IndicatorWeather title={'Indicador 1'} subtitle={'Unidad 1'} value={'1.23'} />
@@ -31,6 +31,7 @@ function App() {
       <Grid size={{ xs: 12, xl: 4 }}>Elemento: Gráfico 1</Grid>
 
     </Grid>
+    </>
   )
 }
 
