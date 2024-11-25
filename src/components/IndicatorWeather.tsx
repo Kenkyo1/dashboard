@@ -6,8 +6,6 @@ interface Indicator {
     subtitle?: String;
     value?: String;
 }
-
-
 export default function IndicatorWeather(config: Indicator) {
     return (
         <Paper
