@@ -5,6 +5,8 @@ import TableWeather from './components/TableWeather';
 import ControlWeather from './components/ControlWeather';
 import LineChartWeather from './components/LineChartWeather';
 
+{/* Hooks */ }
+import { useEffect } from 'react';
 
 function App() {
 
@@ -43,7 +45,7 @@ function App() {
 
         {/* Gráfico */}
         <Grid size={{ xs: 12, xl: 4 }}>
-          <LineChartWeather/>
+          <LineChartWeather />
         </Grid>
 
       </Grid>
