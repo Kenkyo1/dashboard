@@ -4,6 +4,7 @@ import IndicatorWeather from './components/IndicatorWeather';
 import TableWeather from './components/TableWeather';
 import ControlWeather from './components/ControlWeather';
 import LineChartWeather from './components/LineChartWeather';
+import Item from './interface/Item';
 
 {/* Hooks */ }
 import { useEffect, useState } from 'react';
@@ -14,11 +15,12 @@ interface Indicator {
   value?: String;
 }
 
-
 function App() {
 
   {/* Variable de estado y función de actualización */ }
   let [indicators, setIndicators] = useState<Indicator[]>([])
+
+  let [items, setItems] = useState<Item[]>([])
 
   {/* Hook: useEffect */ }
   useEffect(() => {
@@ -34,6 +36,9 @@ function App() {
       const xml = parser.parseFromString(savedTextXML, "application/xml");
 
       let dataToIndicators: Indicator[] = new Array<Indicator>();
+
+      // arreglo temporal del tipo ITEM
+      let datoItems: Item[] = new Array<Item>();
 
       {/* 
           Análisis, extracción y almacenamiento del contenido del XML 
@@ -53,6 +58,21 @@ function App() {
 
       let altitude = location.getAttribute("altitude") || ""
       dataToIndicators.push({ "title": "Location", "subtitle": "Altitude", "value": altitude })
+
+      // referencias a los elementos de time
+      let timeItem = xml.getElementsByTagName("time")[1]
+
+      let dateFrom = timeItem.getAttribute("to") || ""
+      let dateTo = timeItem.getAttribute("from") || ""
+
+      let precipitacion = xml.getElementsByTagName("time > precipitation")[1]
+      let probability = precipitacion.getAttribute("probability") || ""
+
+      let humidity = xml.getElementsByTagName("time > humidity")[1]
+      let humidityValue = humidity.getAttribute("value") || ""
+
+      let clouds = xml.getElementsByTagName("time > clouds")[1]
+      let cloudsValue = clouds.getAttribute("all") || ""
 
       // console.log(dataToIndicators)
 
