@@ -1,5 +1,6 @@
 {/* Hooks */ }
-import { useState, useRef } from 'react';
+// import { useState, useRef } from 'react';
+import { useRef } from 'react';
 
 {/* Componentes MUI */ }
 
@@ -16,7 +17,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 export default function ControlWeather() {
 
     {/* Variable de estado y función de actualización */ }
-    let [selected, setSelected] = useState(-1)
+    // let [selected, setSelected] = useState(-1)
 
     {/* Constante de referencia a un elemento HTML */ }
     const descriptionRef = useRef<HTMLDivElement>(null);
@@ -36,7 +37,7 @@ export default function ControlWeather() {
 
         let idx = parseInt(event.target.value)
         // alert( idx );
-        setSelected(idx);
+        // setSelected(idx);
 
         {/* Modificación de la referencia descriptionRef */ }
         if (descriptionRef.current !== null) {

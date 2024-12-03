@@ -4,7 +4,7 @@ import IndicatorWeather from './components/IndicatorWeather';
 import TableWeather from './components/TableWeather';
 import ControlWeather from './components/ControlWeather';
 import LineChartWeather from './components/LineChartWeather';
-import Item from './interface/Item';
+// import Item from './interface/Item';
 
 {/* Hooks */ }
 import { useEffect, useState } from 'react';
@@ -20,7 +20,7 @@ function App() {
   {/* Variable de estado y función de actualización */ }
   let [indicators, setIndicators] = useState<Indicator[]>([])
 
-  let [items, setItems] = useState<Item[]>([])
+  // let [items, setItems] = useState<Item[]>([])
 
   {/* Hook: useEffect */ }
   useEffect(() => {
