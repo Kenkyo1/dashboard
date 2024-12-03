@@ -38,7 +38,7 @@ function App() {
       let dataToIndicators: Indicator[] = new Array<Indicator>();
 
       // arreglo temporal del tipo ITEM
-      let datoItems: Item[] = new Array<Item>();
+      // let datoItems: Item[] = new Array<Item>();
 
       {/* 
           Análisis, extracción y almacenamiento del contenido del XML 
@@ -60,19 +60,19 @@ function App() {
       dataToIndicators.push({ "title": "Location", "subtitle": "Altitude", "value": altitude })
 
       // referencias a los elementos de time
-      let timeItem = xml.getElementsByTagName("time")[1]
+      // let timeItem = xml.getElementsByTagName("time")[1]
 
-      let dateFrom = timeItem.getAttribute("to") || ""
-      let dateTo = timeItem.getAttribute("from") || ""
+      // let dateFrom = timeItem.getAttribute("to") || ""
+      // let dateTo = timeItem.getAttribute("from") || ""
 
-      let precipitacion = xml.getElementsByTagName("time > precipitation")[1]
-      let probability = precipitacion.getAttribute("probability") || ""
+      // let precipitacion = xml.getElementsByTagName("time > precipitation")[1]
+      // let probability = precipitacion.getAttribute("probability") || ""
 
-      let humidity = xml.getElementsByTagName("time > humidity")[1]
-      let humidityValue = humidity.getAttribute("value") || ""
+      // let humidity = xml.getElementsByTagName("time > humidity")[1]
+      // let humidityValue = humidity.getAttribute("value") || ""
 
-      let clouds = xml.getElementsByTagName("time > clouds")[1]
-      let cloudsValue = clouds.getAttribute("all") || ""
+      // let clouds = xml.getElementsByTagName("time > clouds")[1]
+      // let cloudsValue = clouds.getAttribute("all") || ""
 
       // console.log(dataToIndicators)
 
@@ -88,7 +88,7 @@ function App() {
     return indicators
       .map(
         (indicator, idx) => (
-          <Grid key={idx} size={{ xs: 12, xl: 3 }}>
+          <Grid key={idx} size={{ xs: 12, sm: 6, md: 3, xl: 3 }}>
             <IndicatorWeather
               title={indicator["title"]}
               subtitle={indicator["subtitle"]}
@@ -121,13 +121,13 @@ function App() {
         {renderIndicators()}
 
         {/* TABLA */}
-        <Grid size={{ xs: 12, xl: 8 }}>
+        <Grid size={{ xs: 12, sm: 12, md: 8, xl: 8 }}>
           {/* Grid Anidado */}
           <Grid container spacing={2}>
-            <Grid size={{ xs: 12, xl: 3 }}>
+            <Grid size={{ xs: 12, sm: 3, md: 4, xl: 3 }}>
               <ControlWeather />
             </Grid>
-            <Grid size={{ xs: 12, xl: 9 }}>
+            <Grid size={{ xs: 12, sm: 9, md: 8, xl: 9 }}>
               <TableWeather />
             </Grid>
           </Grid>
@@ -135,7 +135,7 @@ function App() {
         </Grid>
 
         {/* Gráfico */}
-        <Grid size={{ xs: 12, xl: 4 }}>
+        <Grid size={{ xs: 12, sm: 8, md: 6, xl: 4 }}>
           <LineChartWeather />
         </Grid>
 
