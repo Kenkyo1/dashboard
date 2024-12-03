@@ -2,7 +2,7 @@
   "name": "dashboard",
   "private": true,
   "version": "0.0.0",
-  "home": "https://Kenkyo1.github.io/dashboard",
+  "home": "https://kenkyo1.github.io/dashboard",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
