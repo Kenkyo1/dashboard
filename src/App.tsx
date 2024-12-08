@@ -4,7 +4,7 @@ import IndicatorWeather from './components/IndicatorWeather';
 import TableWeather from './components/TableWeather';
 import ControlWeather from './components/ControlWeather';
 import LineChartWeather from './components/LineChartWeather';
-// import Item from './interface/Item';
+import Item from './interface/Item';
 
 {/* Hooks */ }
 import { useEffect, useState } from 'react';
@@ -20,7 +20,7 @@ function App() {
   {/* Variable de estado y función de actualización */ }
   let [indicators, setIndicators] = useState<Indicator[]>([])
 
-  // let [items, setItems] = useState<Item[]>([])
+  let [items, setItems] = useState<Item[]>([])
 
   {/* Hook: useEffect */ }
   useEffect(() => {
@@ -38,7 +38,7 @@ function App() {
       let dataToIndicators: Indicator[] = new Array<Indicator>();
 
       // arreglo temporal del tipo ITEM
-      // let datoItems: Item[] = new Array<Item>();
+      let dataItems: Item[] = new Array<Item>();
 
       {/* 
           Análisis, extracción y almacenamiento del contenido del XML 
@@ -60,24 +60,40 @@ function App() {
       dataToIndicators.push({ "title": "Location", "subtitle": "Altitude", "value": altitude })
 
       // referencias a los elementos de time
-      // let timeItem = xml.getElementsByTagName("time")[1]
+      let timeElements = xml.getElementsByTagName("time")
 
-      // let dateFrom = timeItem.getAttribute("to") || ""
-      // let dateTo = timeItem.getAttribute("from") || ""
+      for (let i = 0; i < Math.min(timeElements.length, 6); i++) {
+        let timeItem = timeElements[i];
 
-      // let precipitacion = xml.getElementsByTagName("time > precipitation")[1]
-      // let probability = precipitacion.getAttribute("probability") || ""
+        let fromFull = timeItem.getAttribute("from") || "";
+        let from = fromFull.split("T")[1] || "";
+        let toFull = timeItem.getAttribute("to") || "";
+        let to = toFull.split("T")[1] || "";
 
-      // let humidity = xml.getElementsByTagName("time > humidity")[1]
-      // let humidityValue = humidity.getAttribute("value") || ""
+        let precipitation = timeItem.getElementsByTagName("precipitation")[0];
+        let probability = precipitation?.getAttribute("probability") || "";
 
-      // let clouds = xml.getElementsByTagName("time > clouds")[1]
-      // let cloudsValue = clouds.getAttribute("all") || ""
+        let humidity = timeItem.getElementsByTagName("humidity")[0];
+        let humidityValue = humidity?.getAttribute("value") || "";
+
+        let clouds = timeItem.getElementsByTagName("clouds")[0];
+        let cloudsValue = clouds?.getAttribute("all") || "";
+
+        // Almacenamos cada Item en el arreglo temporal
+        dataItems.push({
+          dateStart: from,
+          dateEnd: to,
+          precipitation: probability,
+          humidity: humidityValue,
+          clouds: cloudsValue
+        });
+      }
 
       // console.log(dataToIndicators)
 
       {/* Modificación de la variable de estado mediante la función de actualización */ }
       setIndicators(dataToIndicators)
+      setItems(dataItems);
     }
 
     request();
@@ -105,19 +121,6 @@ function App() {
 
         {/* Indicadores */}
 
-        {/* <Grid size={{ xs: 12, xl: 3 }}>
-          <IndicatorWeather title={'Indicador 1'} subtitle={'Unidad 1'} value={'1.23'} />
-        </Grid>
-        <Grid size={{ xs: 12, xl: 3 }}>
-          <IndicatorWeather title={'Indicador 2'} subtitle={'Unidad 2'} value={'3.12'} />
-        </Grid>
-        <Grid size={{ xs: 12, xl: 3 }}>
-          <IndicatorWeather title={'Indicador 3'} subtitle={'Unidad 3'} value={'2.31'} />
-        </Grid>
-        <Grid size={{ xs: 12, xl: 3 }}>
-          <IndicatorWeather title={'Indicador 4'} subtitle={'Unidad 4'} value={'3.21'} />
-        </Grid> */}
-
         {renderIndicators()}
 
         {/* TABLA */}
@@ -128,7 +131,7 @@ function App() {
               <ControlWeather />
             </Grid>
             <Grid size={{ xs: 12, sm: 9, md: 8, xl: 9 }}>
-              <TableWeather />
+              <TableWeather itemsIn={items} />
             </Grid>
           </Grid>
 
